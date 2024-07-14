@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types'; // Add this line to import PropTypes
 import classes from './PostList.module.css';
 import Post from './Post';
@@ -6,20 +6,48 @@ import NewPost from './NewPost';
 import Modal from './Modal';
 
 export default function PostList({ modalIsVisible, hideModalHandler }) {
-  const [posts, setPosts] = useState([]),
-    addPostHandler = (postData) => {
-      // ! fetch() function is used to send and fetch data from back end. Not only for get from server
-      fetch('http://localhost:8080/posts', {
-        method: 'POST',
-        body: JSON.stringify(postData),
-        headers: {
-          'Content-type': 'application/json',
-        },
-      });
+  // ! this will cause loop so to fix that use useEffect
+  // ! also we can not use async function here without useEffect hook
+  // fetch(
+  //   'http://localhost:8080/posts'
+  //     .then((response) => response.JSON())
+  //     .then((data) =>
+  //       setPosts(setPosts((prevPostData) => [data.posts, ...prevPostData]))
+  //     )
+  // );
 
-      setPosts((prevPostData) => [postData, ...prevPostData]);
-      console.log(posts);
-    };
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch('https://localhost:8080/posts');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const resData = await response.json();
+        setPosts((prevPostData) => [resData, ...prevPostData]);
+      } catch (error) {
+        console.error('Fetch error: ', error);
+      }
+    })();
+  }, []);
+
+  function addPostHandler(postData) {
+    // ! fetch() function is used to send and fetch data from back end. Not only for get from server
+    // ! default goal of fetch() is to get but below there we configured it method 'POST'
+    // ! fetch() was in the PostList.jsx call this API method 👇
+    fetch('http://localhost:8080/posts', {
+      method: 'POST',
+      body: JSON.stringify(postData),
+      headers: {
+        'Content-type': 'application/json',
+      },
+    });
+
+    setPosts((prevPostData) => [postData, ...prevPostData]);
+    console.log(posts);
+  }
 
   return (
     <>
