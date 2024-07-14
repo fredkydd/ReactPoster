@@ -17,7 +17,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// !fetch() was in the PostList.jsx call this API method 👇
 app.get('/posts', async (req, res) => {
   const storedPosts = await getStoredPosts();
   // await new Promise((resolve, reject) => setTimeout(() => resolve(), 1500));
