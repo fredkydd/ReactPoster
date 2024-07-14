@@ -1,0 +1,34 @@
+{
+  "posts": [
+    {
+      "name": "Fred",
+      "body": "jbasd'ojhnadoi'jnhdwi'knmil654132",
+      "id": "0.7929593626079061"
+    },
+    {
+      "name": "Illusion",
+      "body": "ihasoidiasjopajmpo",
+      "id": "0.7676039914643795"
+    },
+    {
+      "name": "Farid",
+      "body": "GHVGKADSVHJABDHJ",
+      "id": "0.30767875334235173"
+    },
+    {
+      "name": "Farid",
+      "body": "ugui;kjbkj",
+      "id": "0.5245995805202244"
+    },
+    {
+      "name": "Farid",
+      "body": "Next.js is for express.js",
+      "id": "0.1715427375894858"
+    },
+    {
+      "body": "This course is hopefully very helpful to you!",
+      "author": "Maximilian",
+      "id": "post-1"
+    }
+  ]
+}
