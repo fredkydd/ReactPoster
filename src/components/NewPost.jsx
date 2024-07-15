@@ -12,6 +12,7 @@ export default function NewPost({ hideModalHandler, addPostHandler }) {
       const postData = {
         name: enteredName,
         body: enteredBody,
+        id: enteredName.lastIndexOf,
       };
       console.log(postData);
 
