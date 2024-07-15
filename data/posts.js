@@ -1,17 +1,23 @@
 import { readFile, writeFile } from 'node:fs/promises';
 
-async function getStoredPosts() {
-  const rawFileContent = await readFile('posts.json', { encoding: 'utf-8' }),
-    data = JSON.parse(rawFileContent),
-    storedPosts = data.posts ?? [];
-  return storedPosts;
+export async function getStoredPosts() {
+  try {
+    const rawFileContent = await readFile('posts.json', { encoding: 'utf-8' });
+    const data = JSON.parse(rawFileContent);
+    return data.posts ?? [];
+  } catch (error) {
+    console.error('Error reading or parsing posts.json:', error);
+    return [];
+  }
 }
 
-function storePosts(posts) {
-  return writeFile('posts.json', JSON.stringify({ posts: posts || [] }));
+export async function storePosts(posts) {
+  try {
+    await writeFile(
+      'posts.json',
+      JSON.stringify({ posts: posts || [] }, null, 2)
+    );
+  } catch (error) {
+    console.error('Error writing to posts.json:', error);
+  }
 }
-
-const _getStoredPosts = getStoredPosts;
-export { _getStoredPosts as getStoredPosts };
-const _storePosts = storePosts;
-export { _storePosts as storePosts };

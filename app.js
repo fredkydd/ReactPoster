@@ -1,9 +1,8 @@
 import { getStoredPosts, storePosts } from './data/posts.js';
 import express from 'express';
 import pkg from 'body-parser';
-const { json } = pkg;
-// import { json } from 'body-parser';
 
+const { json } = pkg;
 const app = express();
 
 app.use(json());
@@ -18,27 +17,43 @@ app.use((req, res, next) => {
 });
 
 app.get('/posts', async (req, res) => {
-  const storedPosts = await getStoredPosts();
-  // await new Promise((resolve, reject) => setTimeout(() => resolve(), 1500));
-  res.json({ posts: storedPosts });
+  try {
+    const storedPosts = await getStoredPosts();
+    // !Delaying for testing
+    await new Promise((resolve, reject) => setTimeout(() => resolve(), 1500));
+    res.json({ posts: storedPosts });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to load posts.' });
+  }
 });
 
 app.get('/posts/:id', async (req, res) => {
-  const storedPosts = await getStoredPosts();
-  const post = storedPosts.find((post) => post.id === req.params.id);
-  res.json({ post });
+  try {
+    const storedPosts = await getStoredPosts();
+    const post = storedPosts.find((post) => post.id === req.params.id);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found.' });
+    }
+    res.json({ post });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to load post.' });
+  }
 });
 
 app.post('/posts', async (req, res) => {
-  const existingPosts = await getStoredPosts();
-  const postData = req.body;
-  const newPost = {
-    ...postData,
-    id: Math.random().toString(),
-  };
-  const updatedPosts = [newPost, ...existingPosts];
-  await storePosts(updatedPosts);
-  res.status(201).json({ message: 'Stored new post.', post: newPost });
+  try {
+    const existingPosts = await getStoredPosts();
+    const postData = req.body;
+    const newPost = {
+      ...postData,
+      id: Math.random().toString(),
+    };
+    const updatedPosts = [newPost, ...existingPosts];
+    await storePosts(updatedPosts);
+    res.status(201).json({ message: 'Stored new post.', post: newPost });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to store post.' });
+  }
 });
 
 app.listen(8080, () => {
