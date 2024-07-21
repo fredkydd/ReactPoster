@@ -1,6 +1,11 @@
 {
   "posts": [
     {
+      "name": "Fred",
+      "body": "Next.jsx is starting",
+      "id": "0.8065801173222014"
+    },
+    {
       "name": "Farid",
       "body": "First post",
       "id": "0.16447178789336458"
