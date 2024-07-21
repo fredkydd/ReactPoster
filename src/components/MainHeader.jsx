@@ -11,7 +11,7 @@ export default function MainHeader({ showModalHandler }) {
       </h1>
       <p>
         <button className={classes.button} onClick={showModalHandler}>
-          <MdPostAdd size={20} color="tomato" />
+          <MdPostAdd size={20} color="grey" />
           New Post
         </button>
       </p>

@@ -9,7 +9,7 @@ export default function PostList({ modalIsVisible, hideModalHandler }) {
   const [posts, setPosts] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
 
-  // Fetch posts (GET)
+  // !Fetch posts (GET)
   const fetchPosts = useCallback(async () => {
     try {
       setIsFetching(true);
@@ -18,7 +18,7 @@ export default function PostList({ modalIsVisible, hideModalHandler }) {
         throw new Error('Network response was not ok');
       }
       const resData = await response.json();
-      setPosts(resData.posts); // Set fetched posts for initial load
+      setPosts(resData.posts); //! Set fetched posts for initial load
     } catch (error) {
       console.error('Fetch error:', error);
     } finally {
@@ -26,7 +26,7 @@ export default function PostList({ modalIsVisible, hideModalHandler }) {
     }
   }, []);
 
-  // Add new post (POST)
+  // !Add new post (POST)
   const addPostHandler = useCallback(async (postData) => {
     try {
       const response = await fetch('http://localhost:8080/posts', {
