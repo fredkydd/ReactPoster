@@ -1,6 +1,26 @@
 {
   "posts": [
     {
+      "body": "Hello ",
+      "name": "Farid",
+      "id": "0.9517446098988642"
+    },
+    {
+      "body": "aaaa",
+      "name": "aaa",
+      "id": "0.48662060526307993"
+    },
+    {
+      "body": "Latest post after created client side post method by using React Router",
+      "name": "Farid",
+      "id": "0.723461031301071"
+    },
+    {
+      "name": "Illusion",
+      "body": "New Post after configured React Router",
+      "id": "0.09043860388381453"
+    },
+    {
       "name": "Fred",
       "body": "Next.jsx is starting",
       "id": "0.8065801173222014"

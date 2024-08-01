@@ -2,8 +2,8 @@ import { getStoredPosts, storePosts } from './data/posts.js';
 import express from 'express';
 import pkg from 'body-parser';
 
-const { json } = pkg;
-const app = express();
+const { json } = pkg,
+  app = express();
 
 app.use(json());
 
@@ -20,7 +20,7 @@ app.get('/posts', async (req, res) => {
   try {
     const storedPosts = await getStoredPosts();
     // !Delaying for testing
-    await new Promise((resolve, reject) => setTimeout(() => resolve(), 1500));
+    // await new Promise((resolve, reject) => setTimeout(() => resolve(), 1500));
     res.json({ posts: storedPosts });
   } catch (error) {
     res.status(500).json({ message: 'Failed to load posts.' });
