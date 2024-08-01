@@ -1,17 +1,14 @@
-'use strict';
-import PropTypes from 'prop-types';
+/* eslint-disable react/prop-types */
+import { Link } from 'react-router-dom';
 import classes from './Post.module.css';
 
-export default function Post({ name, body }) {
+export default function Post({ id, name, body }) {
   return (
-    <section className={classes.post}>
-      <p className={classes.name}>{name}</p>
-      <p className={classes.text}>{body}</p>
-    </section>
+    <li className={classes.post}>
+      <Link to={id}>
+        <p className={classes.name}>{name}</p>
+        <p className={classes.text}>{body}</p>
+      </Link>
+    </li>
   );
 }
-
-Post.propTypes = {
-  name: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
-};

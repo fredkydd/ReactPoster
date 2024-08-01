@@ -1,24 +1,22 @@
+/* eslint-disable react/prop-types */
 import classes from './Modal.module.css';
-import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
-// todo if it is wrapper we should use children props to add them into wrapper element
+export default function Modal({ children }) {
+  const navigate = useNavigate(),
+    closeHandler = () => navigate('..');
 
-// todo {children} always refers to the content that's passed between the opening && closing tags of your custom component.
-
-export default function Modal({ children, modalIsVisible, hideModalHandler }) {
   return (
     <>
-      <div className={classes.backdrop} onClick={hideModalHandler} />
+      <div className={classes.backdrop} onClick={closeHandler} />
       {/* open={true} === open default value is true */}
-      <dialog className={classes.modal} open={modalIsVisible}>
+      <dialog className={classes.modal} open>
         {children}
       </dialog>
     </>
   );
 }
 
-Modal.propTypes = {
-  children: PropTypes.node.isRequired,
-  modalIsVisible: PropTypes.bool.isRequired,
-  hideModalHandler: PropTypes.func.isRequired,
-};
+// useNavigate uses for the navigating the page. navigate('path')
+// if it is wrapper we should use children props to add them into wrapper element
+// {children} always refers to the content that's passed between the opening && closing tags of your custom component.
